@@ -20,5 +20,6 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<User>();
         modelBuilder.Entity<Region>();
+        modelBuilder.Entity<TouristSite>();
     }
 }

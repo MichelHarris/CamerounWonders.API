@@ -60,6 +60,9 @@ builder.Services.AddScoped<IRegionService, RegionService>();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+builder.Services.AddScoped<ITouristSiteRepository, TouristSiteRepository>();
+builder.Services.AddScoped<ITouristSiteService, TouristSiteService>();
 builder.Services.AddAuthentication(
     JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
@@ -94,6 +97,12 @@ builder.Services.AddAuthentication(
         }
     };
 });
+builder.Services.AddScoped<
+    ITouristSiteRepository,
+    TouristSiteRepository>();
+builder.Services.AddScoped<
+    ITouristSiteService,
+    TouristSiteService>();
 
 var app = builder.Build();
 
