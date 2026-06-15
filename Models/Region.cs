@@ -9,5 +9,11 @@
         public string Description { get; set; } = string.Empty;
 
         public string? PhotoUrl { get; set; }
+        public ICollection<TouristSite> TouristSites
+        {
+            get;
+            set;
+        }
+= new List<TouristSite>();
     }
 }

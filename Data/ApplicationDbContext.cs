@@ -12,6 +12,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Region> Regions => Set<Region>();
     public DbSet<User> Users => Set<User>();
+    public DbSet<TouristSite> TouristSites { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
