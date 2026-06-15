@@ -1,0 +1,53 @@
+﻿using CamerounWonders.API.DTOs;
+using CamerounWonders.API.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+namespace CamerounWonders.API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class AuthController : ControllerBase
+{
+    private readonly IAuthService _authService;
+
+    public AuthController(IAuthService authService)
+    {
+        _authService = authService;
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register(
+        RegisterDto dto)
+    {
+        var result =
+            await _authService.RegisterAsync(dto);
+
+        return Ok(result);
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(
+        LoginDto dto)
+    {
+        var token =
+            await _authService.LoginAsync(dto);
+
+        return Ok(new { token });
+    }
+
+    [Authorize]
+    [HttpGet("test")]
+    public IActionResult Test()
+    {
+        return Ok(new
+        {
+            Message = "JWT valide",
+            User = User.Identity?.Name,
+            Claims = User.Claims.Select(c => new
+            {
+                c.Type,
+                c.Value
+            })
+        });
+    }
+}
