@@ -63,6 +63,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 builder.Services.AddScoped<ITouristSiteRepository, TouristSiteRepository>();
 builder.Services.AddScoped<ITouristSiteService, TouristSiteService>();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddAuthentication(
     JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
