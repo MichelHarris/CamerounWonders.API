@@ -13,6 +13,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Region> Regions => Set<Region>();
     public DbSet<User> Users => Set<User>();
     public DbSet<TouristSite> TouristSites { get; set; }
+    public DbSet<Review> Reviews { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -21,5 +22,6 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<User>();
         modelBuilder.Entity<Region>();
         modelBuilder.Entity<TouristSite>();
+        modelBuilder.Entity<Review>();
     }
 }

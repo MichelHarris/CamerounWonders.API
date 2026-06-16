@@ -28,6 +28,21 @@ public class TouristSitesController : ControllerBase
         return Ok(sites);
     }
 
+    [AllowAnonymous]
+    [HttpGet("search")]
+    public async Task<ActionResult<List<TouristSiteDto>>>
+    Search(
+        [FromQuery] string? name,
+        [FromQuery] int? regionId)
+    {
+        var sites =
+            await _service.SearchAsync(
+                name,
+                regionId);
+
+        return Ok(sites);
+    }
+
     // Public
     [AllowAnonymous]
     [HttpGet("{id}")]

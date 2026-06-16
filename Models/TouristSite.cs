@@ -15,5 +15,7 @@
         public int RegionId { get; set; }
 
         public Region? Region { get; set; }
+        public ICollection<Review> Reviews { get; set; }
+            = new List<Review>();
     }
 }

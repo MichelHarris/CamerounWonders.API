@@ -108,4 +108,18 @@ public class TouristSiteService : ITouristSiteService
             RegionName = site.Region?.Nom ?? string.Empty
         };
     }
+
+    public async Task<List<TouristSiteDto>> SearchAsync(
+    string? name,
+    int? regionId)
+    {
+        var sites =
+            await _repository.SearchAsync(
+                name,
+                regionId);
+
+        return sites
+            .Select(MapToDto)
+            .ToList();
+    }
 }

@@ -15,4 +15,7 @@ public interface ITouristSiteService
     Task<bool> UpdateAsync(int id, UpdateTouristSiteDto dto);
 
     Task<bool> DeleteAsync(int id);
+    Task<List<TouristSiteDto>> SearchAsync(
+    string? name,
+    int? regionId);
 }

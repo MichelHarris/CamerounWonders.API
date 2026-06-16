@@ -62,4 +62,27 @@ public class TouristSiteRepository : ITouristSiteRepository
 
         await _context.SaveChangesAsync();
     }
+
+    public async Task<List<TouristSite>> SearchAsync(
+    string? name,
+    int? regionId)
+    {
+        var query = _context.TouristSites
+            .Include(t => t.Region)
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            query = query.Where(t =>
+                t.Name.Contains(name));
+        }
+
+        if (regionId.HasValue)
+        {
+            query = query.Where(t =>
+                t.RegionId == regionId.Value);
+        }
+
+        return await query.ToListAsync();
+    }
 }

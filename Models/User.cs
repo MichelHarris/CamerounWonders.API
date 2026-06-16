@@ -13,4 +13,6 @@ public class User
     public string Role { get; set; } = "User";
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public ICollection<Review> Reviews { get; set; }
+        = new List<Review>();
 }

@@ -15,4 +15,7 @@ public interface ITouristSiteRepository
     Task UpdateAsync(TouristSite touristSite);
 
     Task DeleteAsync(TouristSite touristSite);
+    Task<List<TouristSite>> SearchAsync(
+    string? name,
+    int? regionId);
 }

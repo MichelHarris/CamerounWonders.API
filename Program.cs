@@ -105,6 +105,12 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     ITouristSiteService,
     TouristSiteService>();
+builder.Services.AddScoped<
+    IReviewRepository,
+    ReviewRepository>();
+builder.Services.AddScoped<
+    IReviewService,
+    ReviewService>();
 
 var app = builder.Build();
 
