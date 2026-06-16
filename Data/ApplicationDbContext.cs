@@ -14,6 +14,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<User> Users => Set<User>();
     public DbSet<TouristSite> TouristSites { get; set; }
     public DbSet<Review> Reviews { get; set; }
+    public DbSet<Favorite> Favorites { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -23,5 +24,6 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Region>();
         modelBuilder.Entity<TouristSite>();
         modelBuilder.Entity<Review>();
+        modelBuilder.Entity<Favorite>();
     }
 }

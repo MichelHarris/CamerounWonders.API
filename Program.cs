@@ -111,6 +111,12 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     IReviewService,
     ReviewService>();
+builder.Services.AddScoped<
+    IFavoriteRepository,
+    FavoriteRepository>();
+builder.Services.AddScoped<
+    IFavoriteService,
+    FavoriteService>();
 
 var app = builder.Build();
 
