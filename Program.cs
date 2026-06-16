@@ -117,6 +117,12 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     IFavoriteService,
     FavoriteService>();
+builder.Services.AddScoped<
+    IDashboardRepository,
+    DashboardRepository>();
+builder.Services.AddScoped<
+    IDashboardService,
+    DashboardService>();
 
 var app = builder.Build();
 
