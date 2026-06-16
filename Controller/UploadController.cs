@@ -24,6 +24,31 @@ public class UploadController : ControllerBase
         {
             return BadRequest("Aucun fichier envoyé.");
         }
+        var allowedExtensions = new[]
+{
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".webp"
+};
+
+        var extension =
+            Path.GetExtension(file.FileName)
+                .ToLowerInvariant();
+
+        if (!allowedExtensions.Contains(extension))
+        {
+            return BadRequest(
+                "Seuls les fichiers JPG, JPEG, PNG et WEBP sont autorisés.");
+        }
+        const long maxFileSize =
+    5 * 1024 * 1024; // 5 MB
+
+        if (file.Length > maxFileSize)
+        {
+            return BadRequest(
+                "La taille maximale autorisée est de 5 MB.");
+        }
 
         var uploadsFolder =
             Path.Combine(
