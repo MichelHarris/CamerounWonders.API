@@ -123,6 +123,10 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     IDashboardService,
     DashboardService>();
+builder.Services
+    .AddScoped<
+        IRecommendationService,
+        RecommendationService>();
 
 var app = builder.Build();
 

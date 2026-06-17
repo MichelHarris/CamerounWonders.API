@@ -10,4 +10,6 @@ public interface IDashboardRepository
 
     Task<List<MostFavoritedSiteDto>>
         GetMostFavoritedSitesAsync();
+    Task<List<TouristSiteDto>>
+    GetRecentSitesAsync();
 }

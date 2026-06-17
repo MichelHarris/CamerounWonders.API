@@ -117,4 +117,36 @@ public class DashboardRepository
             .Take(5)
             .ToListAsync();
     }
+    public async Task<List<TouristSiteDto>>
+    GetRecentSitesAsync()
+    {
+        return await _context.TouristSites
+            .Include(t => t.Region)
+            .OrderByDescending(t => t.Id)
+            .Take(5)
+            .Select(t => new TouristSiteDto
+            {
+                Id = t.Id,
+
+                Name = t.Name,
+
+                Description =
+                    t.Description,
+
+                Location =
+                    t.Location,
+
+                ImageUrl =
+                    t.ImageUrl,
+
+                RegionId =
+                    t.RegionId,
+
+                RegionName =
+                    t.Region != null
+                        ? t.Region.Nom
+                        : string.Empty
+            })
+            .ToListAsync();
+    }
 }
