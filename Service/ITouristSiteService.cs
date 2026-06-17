@@ -18,4 +18,7 @@ public interface ITouristSiteService
     Task<List<TouristSiteDto>> SearchAsync(
     string? name,
     int? regionId);
+    Task<List<NearbyTouristSiteDto>>
+    GetNearbyAsync(
+        NearbySearchDto dto);
 }

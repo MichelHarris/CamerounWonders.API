@@ -130,4 +130,87 @@ public class TouristSiteService : ITouristSiteService
             .Select(MapToDto)
             .ToList();
     }
+
+    public async Task<List<NearbyTouristSiteDto>>
+    GetNearbyAsync(
+        NearbySearchDto dto)
+    {
+        var sites =
+            await _repository.GetAllAsync();
+
+        var result =
+            sites.Select(site =>
+            {
+                var distance =
+                    CalculateDistance(
+                        dto.Latitude,
+                        dto.Longitude,
+                        site.Latitude,
+                        site.Longitude);
+
+                return new NearbyTouristSiteDto
+                {
+                    Id = site.Id,
+                    Name = site.Name,
+                    Location = site.Location,
+                    Latitude = site.Latitude,
+                    Longitude = site.Longitude,
+                    DistanceKm = Math.Round(
+                        distance,
+                        2)
+                };
+            })
+            .Where(x =>
+                x.DistanceKm <= dto.RadiusKm)
+            .OrderBy(x =>
+                x.DistanceKm)
+            .ToList();
+
+        return result;
+    }
+    private static double CalculateDistance(
+    double lat1,
+    double lon1,
+    double lat2,
+    double lon2)
+    {
+        const double earthRadiusKm = 6371;
+
+        var dLat =
+            DegreesToRadians(
+                lat2 - lat1);
+
+        var dLon =
+            DegreesToRadians(
+                lon2 - lon1);
+
+        var a =
+            Math.Sin(dLat / 2) *
+            Math.Sin(dLat / 2)
+            +
+            Math.Cos(
+                DegreesToRadians(lat1))
+            *
+            Math.Cos(
+                DegreesToRadians(lat2))
+            *
+            Math.Sin(dLon / 2)
+            *
+            Math.Sin(dLon / 2);
+
+        var c =
+            2 *
+            Math.Atan2(
+                Math.Sqrt(a),
+                Math.Sqrt(1 - a));
+
+        return earthRadiusKm * c;
+    }
+    private static double DegreesToRadians(
+    double degrees)
+    {
+        return degrees *
+            (Math.PI / 180);
+    }
 }
+

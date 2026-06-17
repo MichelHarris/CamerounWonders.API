@@ -115,4 +115,18 @@ public class TouristSitesController : ControllerBase
 
         return NoContent();
     }
+
+    [AllowAnonymous]
+    [HttpPost("nearby")]
+    public async Task<ActionResult<
+    List<NearbyTouristSiteDto>>>
+    GetNearby(
+        NearbySearchDto dto)
+    {
+        var sites =
+            await _service
+                .GetNearbyAsync(dto);
+
+        return Ok(sites);
+    }
 }
