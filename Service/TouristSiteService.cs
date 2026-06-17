@@ -151,13 +151,40 @@ public class TouristSiteService : ITouristSiteService
                 return new NearbyTouristSiteDto
                 {
                     Id = site.Id,
+
                     Name = site.Name,
+
                     Location = site.Location,
-                    Latitude = site.Latitude,
-                    Longitude = site.Longitude,
-                    DistanceKm = Math.Round(
-                        distance,
-                        2)
+
+                    RegionName =
+        site.Region?.Nom
+        ?? string.Empty,
+
+                    ImageUrl =
+        site.ImageUrl,
+
+                    AverageRating =
+        site.Reviews.Any()
+            ? Math.Round(
+                site.Reviews
+                    .Average(r =>
+                        r.Rating),
+                2)
+            : 0,
+
+                    FavoritesCount =
+        site.Favorites.Count,
+
+                    Latitude =
+        site.Latitude,
+
+                    Longitude =
+        site.Longitude,
+
+                    DistanceKm =
+        Math.Round(
+            distance,
+            2)
                 };
             })
             .Where(x =>

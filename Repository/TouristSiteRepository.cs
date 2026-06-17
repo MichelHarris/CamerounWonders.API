@@ -18,14 +18,18 @@ public class TouristSiteRepository : ITouristSiteRepository
     {
         return await _context.TouristSites
             .Include(t => t.Region)
+            .Include(t => t.Reviews)
+            .Include(t => t.Favorites)
             .ToListAsync();
     }
 
     public async Task<TouristSite?> GetByIdAsync(int id)
     {
         return await _context.TouristSites
-            .Include(t => t.Region)
-            .FirstOrDefaultAsync(t => t.Id == id);
+     .Include(t => t.Region)
+     .Include(t => t.Reviews)
+     .Include(t => t.Favorites)
+     .FirstOrDefaultAsync(t => t.Id == id);
     }
 
     public async Task<List<TouristSite>> GetByRegionIdAsync(
