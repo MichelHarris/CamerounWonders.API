@@ -24,5 +24,11 @@ public class CreateTouristSiteDtoValidator
         RuleFor(x => x.RegionId)
             .GreaterThan(0)
             .WithMessage("Une région valide est requise.");
+
+        RuleFor(x => x.Latitude)
+    .InclusiveBetween(-90, 90);
+
+        RuleFor(x => x.Longitude)
+            .InclusiveBetween(-180, 180);
     }
 }

@@ -15,4 +15,8 @@ public class TouristSiteDto
     public int RegionId { get; set; }
 
     public string RegionName { get; set; } = string.Empty;
+
+    public double Latitude { get; set; }
+
+    public double Longitude { get; set; }
 }

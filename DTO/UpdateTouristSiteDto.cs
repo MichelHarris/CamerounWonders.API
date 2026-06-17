@@ -11,4 +11,8 @@ public class UpdateTouristSiteDto
     public string? ImageUrl { get; set; }
 
     public int RegionId { get; set; }
+
+    public double Latitude { get; set; }
+
+    public double Longitude { get; set; }
 }

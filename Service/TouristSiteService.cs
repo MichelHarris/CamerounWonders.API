@@ -48,7 +48,10 @@ public class TouristSiteService : ITouristSiteService
             Description = dto.Description,
             Location = dto.Location,
             ImageUrl = dto.ImageUrl ?? string.Empty,
-            RegionId = dto.RegionId
+            RegionId = dto.RegionId,
+
+            Latitude = dto.Latitude,
+            Longitude = dto.Longitude
         };
 
         var created =
@@ -75,6 +78,8 @@ public class TouristSiteService : ITouristSiteService
         site.Location = dto.Location;
         site.ImageUrl = dto.ImageUrl ?? string.Empty;
         site.RegionId = dto.RegionId;
+        site.Latitude = dto.Latitude;
+        site.Longitude = dto.Longitude;
 
         await _repository.UpdateAsync(site);
 
@@ -105,7 +110,10 @@ public class TouristSiteService : ITouristSiteService
             Location = site.Location,
             ImageUrl = site.ImageUrl,
             RegionId = site.RegionId,
-            RegionName = site.Region?.Nom ?? string.Empty
+            RegionName = site.Region?.Nom ?? string.Empty,
+
+            Latitude = site.Latitude,
+            Longitude = site.Longitude
         };
     }
 
